@@ -82,7 +82,7 @@ func GetAuthorizationLevelToken(token string) (auth AuthInfo, err error) {
 	auth.level = -1
 
 	// Get UserID and expiration date from token
-	rows, err = db.Query("SELECT user_id, expiration FROM auth_token "+
+	rows, err = db.Query("SELECT user_id, expiration FROM auth_tokens "+
 		"WHERE token = ?", token)
 	if err != nil || !rows.Next() {
 		// TODO: need to do some research on rows.Close here. Potential crash.

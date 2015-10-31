@@ -31,9 +31,17 @@ func main() {
 
 	router := rets.NewRouter()
 
-	// Add modules
+	// Connect
 	router.AddRoute(rets.Route{"GET", regexp.MustCompile("^\\/connect$"),
 		HandlerGETConnect})
+
+	// Lockers
+	router.AddRoute(rets.Route{"POST", regexp.MustCompile("^\\/lockers$"),
+		HandlerPOSTLockers})
+	router.AddRoute(rets.Route{"PUT", regexp.MustCompile("^\\/locker/[0-9]+$"),
+		HandlerPUTLocker})
+	router.AddRoute(rets.Route{"GET", regexp.MustCompile("^\\/lockers$"),
+		HandlerGETLockers})
 
 	log.Println("AERTools Server is up and running. Thanks for all the fish!")
 	http.ListenAndServe(":"+cfg.Port, router)
